@@ -1,6 +1,28 @@
-web:
-  build: .
-  volumes:
-    - ".:/src"
-  ports:
-    - "3030:2050"
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+     - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "pepe"
+      MYSQL_DATABASE: "pepe"
+      MYSQL_USER: "pepe"
+      MYSQL_PASSWORD: "pepe"
+  web:
+    depends_on:
+      - db
+    build: .
+    volumes:
+      - ".:/src"
+    ports:
+      - "3030:2050"
+    restart: always
+    environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_USER: "pepe"
+       WORDPRESS_DB_PASSWORD: "pepe"
+volumes:
+    db_data:

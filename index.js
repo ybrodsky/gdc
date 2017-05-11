@@ -1,14 +1,30 @@
-// Load the http module to create an http server.
-var http = require('http');
+var express = require('express')
+var app = express()
+var Sequelize = require('sequelize');
+var sequelize = new Sequelize('pepe', 'root', 'pepe');
 
-// Configure our HTTP server to respond with Hello World to all requests.
-var server = http.createServer(function (request, response) {
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.end("Hello World\n" + 2050 + 'gdo');
+var Test = sequelize.define('test', {
+  one: Sequelize.STRING,
+  two: Sequelize.STRING
 });
 
-// Listen on port 8000, IP defaults to 127.0.0.1
-server.listen(2050);
+sequelize.sync().then(function() {
+  return Test.create({
+    one: 'one',
+    two: 'three'
+  });
+})
 
-// Put a friendly message on the terminal
-console.log("Server running at http://127.0.0.1:2050/");
+app.get('/', function (req, res) {
+  res.send('Hello World!')
+})
+
+app.get('/mysql', function (req, res) {
+  Test.findAll().then(function(results) {
+  	res.send(results);
+  })
+})
+
+app.listen(2050, function () {
+  console.log('Example app listening on port 2050!')
+})

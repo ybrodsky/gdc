@@ -5,6 +5,7 @@ RUN npm install nodemon -g
 RUN mkdir /src
 
 WORKDIR /src
+ADD package.json /src/package.json
 
 EXPOSE 2050
 
