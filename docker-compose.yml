@@ -4,8 +4,11 @@ services:
   db:
     image: mysql
     volumes:
-     - db_data:/var/lib/mysql
+     - db_data:/home/ybrodsky/mysql
     restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "qtc"
+      MYSQL_DATABASE: "sequelize"
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     links:
