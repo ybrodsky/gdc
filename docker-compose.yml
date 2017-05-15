@@ -2,15 +2,20 @@ version: '3'
 
 services:
   db:
-    image: mysql:5.7
+    image: mysql
     volumes:
      - db_data:/var/lib/mysql
     restart: always
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - db
     environment:
-      MYSQL_ROOT_PASSWORD: "pepe"
-      MYSQL_DATABASE: "pepe"
-      MYSQL_USER: "pepe"
-      MYSQL_PASSWORD: "pepe"
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: "qtc"
+    ports:
+      - "2051:80"
   web:
     depends_on:
       - db
@@ -20,9 +25,5 @@ services:
     ports:
       - "3030:2050"
     restart: always
-    environment:
-       WORDPRESS_DB_HOST: db:3306
-       WORDPRESS_DB_USER: "pepe"
-       WORDPRESS_DB_PASSWORD: "pepe"
 volumes:
     db_data:

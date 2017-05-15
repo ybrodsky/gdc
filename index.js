@@ -1,7 +1,7 @@
 var express = require('express')
 var app = express()
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('pepe', 'root', 'pepe');
+var sequelize = new Sequelize('sequelize', 'root', 'qtc');
 
 var Test = sequelize.define('test', {
   one: Sequelize.STRING,
