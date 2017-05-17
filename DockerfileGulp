@@ -1,0 +1,8 @@
+FROM node:0.10.38
+
+RUN npm install gulp -g
+
+WORKDIR /src
+RUN npm i gulp
+
+CMD gulp

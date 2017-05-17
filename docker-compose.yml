@@ -32,3 +32,14 @@ services:
     ports:
       - "3030:2050"
     restart: always
+  gulp:
+    depends_on:
+      - web
+    links:
+      - web:web
+    volumes:
+      - ".:/src"
+    build:
+      dockerfile: DockerfileGulp
+      context: .
+    restart: always

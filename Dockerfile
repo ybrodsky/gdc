@@ -6,6 +6,7 @@ RUN mkdir /src
 
 WORKDIR /src
 ADD package.json /src/package.json
+ADD gulpfile.js /src/gulpfile.js
 
 EXPOSE 2050
 
