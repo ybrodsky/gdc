@@ -1,7 +1,15 @@
 var express = require('express')
 var app = express()
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('sequelize', 'root', 'qtc');
+var sequelize = new Sequelize('pepe', 'wordpress', 'wordpress');
+
+sequelize.sync().then(function(){
+  console.log('DB connection sucessful.');
+}, function(err){
+  // catch error here
+  console.log(err);
+
+});
 
 var Test = sequelize.define('test', {
   one: Sequelize.STRING,

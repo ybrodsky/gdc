@@ -2,13 +2,15 @@ version: '3'
 
 services:
   db:
-    image: mysql
-    volumes:
-     - db_data:/home/ybrodsky/mysql
+    build:
+      dockerfile: Dockerfile.db
+      context: .
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: "qtc"
-      MYSQL_DATABASE: "sequelize"
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: pepe
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     links:
@@ -16,7 +18,7 @@ services:
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: "qtc"
+      MYSQL_ROOT_PASSWORD: "somewordpress"
     ports:
       - "2051:80"
   web:
@@ -28,5 +30,3 @@ services:
     ports:
       - "3030:2050"
     restart: always
-volumes:
-    db_data:
