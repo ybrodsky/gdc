@@ -24,6 +24,8 @@ services:
   web:
     depends_on:
       - db
+    links:
+      - db:db
     build: .
     volumes:
       - ".:/src"

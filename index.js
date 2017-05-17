@@ -1,7 +1,7 @@
 var express = require('express')
 var app = express()
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('pepe', 'wordpress', 'wordpress');
+var sequelize = new Sequelize('pepe', 'wordpress', 'wordpress', {host: 'db'});
 
 sequelize.sync().then(function(){
   console.log('DB connection sucessful.');
